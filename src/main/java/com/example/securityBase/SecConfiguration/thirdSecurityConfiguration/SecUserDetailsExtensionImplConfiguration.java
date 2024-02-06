@@ -1,6 +1,7 @@
 package com.example.securityBase.SecConfiguration.thirdSecurityConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +13,7 @@ import com.example.securityBase.SecurityUserRepo.SecUser;
 import com.example.securityBase.SecurityUserRepo.SecUserRepository;
 
 @Service
+@ConditionalOnProperty(name = "thirdsecuriyConfig", havingValue = "true")
 public class SecUserDetailsExtensionImplConfiguration 
 implements UserDetailsService {
 

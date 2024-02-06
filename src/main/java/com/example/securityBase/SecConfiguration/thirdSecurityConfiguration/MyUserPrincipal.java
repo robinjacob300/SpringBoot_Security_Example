@@ -3,12 +3,14 @@ package com.example.securityBase.SecConfiguration.thirdSecurityConfiguration;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.securityBase.SecurityUserRepo.SecUser;
 
+@ConditionalOnProperty(name = "thirdsecuriyConfig", havingValue = "true")
 public class MyUserPrincipal implements UserDetails {
     private SecUser user;
     public String role = "KUSER";
