@@ -1,0 +1,1 @@
+insert into sec_user (password,secret_question,username,userid) values ('12341','color of orange','trans','1');
