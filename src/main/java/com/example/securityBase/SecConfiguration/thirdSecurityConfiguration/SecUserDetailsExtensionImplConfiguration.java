@@ -38,7 +38,9 @@ implements UserDetailsService {
         		user.setUsername(r.getUsername());
         		user.setPassword(encoder.encode(r.getPassword()));
         		user.setSecretQuestion(r.getSecretQuestion());
-
+        		user.setRole(r.getRole());
+        		
+        		System.out.println("Got role "+ user.getRole());
                 return new MyUserPrincipal(user);
         	}
         }

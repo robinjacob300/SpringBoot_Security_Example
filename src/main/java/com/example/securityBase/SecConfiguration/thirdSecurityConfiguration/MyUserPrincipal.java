@@ -12,10 +12,22 @@ import com.example.securityBase.SecurityUserRepo.SecUser;
 
 @ConditionalOnProperty(name = "thirdsecuriyConfig", havingValue = "true")
 public class MyUserPrincipal implements UserDetails {
-    private SecUser user;
-    public String role = "KUSER";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private SecUser user;
+    public String role;
     public MyUserPrincipal(SecUser user) {
         this.user = user;
+        if(user.getRole() == null)
+        {
+        	this.role = new String("KUSER");
+        }
+        else
+        {
+        	this.role= user.getRole();
+        }
     }
     //...
 

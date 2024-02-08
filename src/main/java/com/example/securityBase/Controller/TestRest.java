@@ -3,7 +3,9 @@ package com.example.securityBase.Controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 
 @RestController
+@EnableMethodSecurity
 public class TestRest {
 
 	@Autowired
@@ -70,6 +73,7 @@ public class TestRest {
 		usr.setUsername(data.getUsername());
 		usr.setPassword(data.getPassword());
 		usr.setSecretQuestion(data.getSecretQuestion());
+		usr.setRole(data.getRole());
 		System.out.println(mapper.writeValueAsString(usr));
 		secUserRepository.save(usr);
 		
@@ -103,5 +107,32 @@ public class TestRest {
 		System.out.println("Inside the archos method");
 		System.out.println("your data is : "+data);
 		return "that data received thanks yo"+data;
+	}
+	
+	@PostMapping("/testroles")
+	@PreAuthorize("hasAuthority('DEMOYSPL')")
+	public String addpostSomedatas2(@RequestBody String data)
+	{
+		System.out.println("Inside the TEST ROLE method");
+		System.out.println("your data is : "+data);
+		return "that data ROLE received thanks yo"+data;
+	}
+	
+	@PostMapping("/testrolessecure")
+	@Secured({"ASOWE","KEROS"})
+	public String testSecureAnnotation(@RequestBody String data)
+	{
+		System.out.println("Inside the testSecureAnnotation method");
+		System.out.println("your data is : "+data);
+		return "that data testSecureAnnotation received thanks yo"+data;
+	}
+	
+	@PostMapping("/preauthorize2")
+	@PreAuthorize("hasRole('LOTUS')")
+	public String addpostSomedatas3(@RequestBody String data)
+	{
+		System.out.println("Inside the TEST ROLE preauthorize2 method");
+		System.out.println("your data is : "+data);
+		return "that data ROLE received thanks yo"+data;
 	}
 }

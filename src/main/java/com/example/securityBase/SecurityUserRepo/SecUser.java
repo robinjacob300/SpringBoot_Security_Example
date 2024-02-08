@@ -30,4 +30,6 @@ public class SecUser {
 	
 	@Column
 	String secretQuestion;
+	
+	String role;
 }
